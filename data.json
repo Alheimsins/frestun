@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Suppegutt",
+    "limits": {
+      "red": 60000,
+      "orange": 40000,
+      "yellow": 20000
+    }
+  },
+  {
+    "title": "Suttegutt",
+    "limits": {
+      "red": 60000,
+      "orange": 40000,
+      "yellow": 20000
+    }
+  }
+]

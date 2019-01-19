@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "name": "frestun",
+  "alias": [
+    "frestun.allthethings.win"
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "builds": [
+    { "src": "package.json", "use": "@now/static-build" }
+  ],
+  "routes": [
+    {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1",
+      "headers": { "cache-control": "s-maxage=86400" }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1",
+      "headers": { "cache-control": "s-maxage=86400" }
+    }
+  ]
+}
