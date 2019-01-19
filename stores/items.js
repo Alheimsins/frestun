@@ -1,7 +1,8 @@
+const items = require('../data.json')
+
 module.exports = store
 
 function store (state, emitter) {
-  state.items = require('../data.json')
   state.lastUpdated = new Date().getTime()
 
   emitter.on('DOMContentLoaded', function () {
@@ -13,6 +14,13 @@ function store (state, emitter) {
     emitter.on('update:all', function (index) {
       emitter.emit(state.events.RENDER)
     })
+    emitter.on('app:init', function () {
+      if (!state.items) {
+        state.items = items
+        emitter.emit('update:all')
+      }
+    })
+    emitter.emit('app:init')
     setInterval(function () {
       const now = new Date().getTime()
       if (now - state.lastUpdated > 10000) {
