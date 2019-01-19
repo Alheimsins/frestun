@@ -14,5 +14,21 @@
       "orange": 40000,
       "yellow": 20000
     }
+  },
+  {
+    "title": "Fjærgutt",
+    "limits": {
+      "red": 60000,
+      "orange": 40000,
+      "yellow": 20000
+    }
+  },
+  {
+    "title": "Grøtgutt",
+    "limits": {
+      "red": 60000,
+      "orange": 40000,
+      "yellow": 20000
+    }
   }
 ]

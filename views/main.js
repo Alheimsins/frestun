@@ -32,7 +32,6 @@ function view (state, emit) {
     e.preventDefault()
     const item = e.target
     const index = item.dataset.index
-    console.log(index)
     emit('item:postpone', index)
   }
 }
