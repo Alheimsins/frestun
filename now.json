@@ -2,7 +2,7 @@
   "version": 2,
   "name": "frestun",
   "alias": [
-    "frestun.allthethings.win"
+    "frestun.allheimsins.net"
   ],
   "env": {
     "NODE_ENV": "production"
