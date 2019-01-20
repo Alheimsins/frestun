@@ -2,7 +2,7 @@
   "version": 2,
   "name": "frestun",
   "alias": [
-    "frestun.allheimsins.net"
+    "frestun.alheimsins.net"
   ],
   "env": {
     "NODE_ENV": "production"
