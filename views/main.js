@@ -18,7 +18,7 @@ function view (state, emit) {
       return html`
         <div data-index="${index}" class="bg-${bgColor} text-${txtColor} shadow-md rounded px-8 pt-6 pb-8 mb-2 cursor-pointer" onclick=${handlePostpone}>
           <h1>${item.title}</h1>
-          Last registration: ${formatDateTime(item.lastPostponed)}
+          Last updated: ${formatDateTime(item.lastPostponed)}
         </div>
       `
     }
