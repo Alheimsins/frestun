@@ -35,7 +35,7 @@ function view (state, emit) {
   function handlePostpone (e) {
     e.preventDefault()
     const item = e.target
-    const index = item.dataset.index
+    const index = item.dataset.index ? item.dataset.index : item.parentNode.dataset.index
     emit('item:postpone', index)
   }
 }
