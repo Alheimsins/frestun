@@ -1,4 +1,4 @@
-const items = require('../data.json')
+const { items, refreshRate } = require('../data.json')
 
 module.exports = store
 
@@ -23,10 +23,10 @@ function store (state, emitter) {
     emitter.emit('app:init')
     setInterval(function () {
       const now = new Date().getTime()
-      if (now - state.lastUpdated > 10000) {
+      if (now - state.lastUpdated > refreshRate) {
         state.lastUpdated = now
         emitter.emit('update:all')
       }
-    }, 10000)
+    }, refreshRate)
   })
 }
