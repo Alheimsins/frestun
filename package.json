@@ -23,7 +23,7 @@
     "choo-persist": "3.0.2",
     "choo-service-worker": "2.4.0",
     "sheetify": "7.3.3",
-    "tailwindcss": "0.7.3"
+    "tailwindcss": "0.7.4"
   },
   "devDependencies": {
     "ava": "1.1.0",
