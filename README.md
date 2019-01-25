@@ -5,13 +5,11 @@
 
 Your friendly pwa for postponing stuff.
 
-Try it at [frestun.alheimsins.net](https://frestun.alheimsins.net)
+Try it at [frestun.alheimsins.net](https://frestun.alheimsins.net).
 
 # Usage
 
-Configure [data.json](data.json) with items, limits and refresh rate.
-
-If you want to deploy to [ZEIT/Now](https://zeit.co/now) configure [now.json](now.json) as well.
+If you want to deploy to [ZEIT/Now](https://zeit.co/now) configure [now.json](now.json).
 
 # License
 
