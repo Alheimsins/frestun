@@ -58,12 +58,17 @@ function view (state, emit) {
     `
   }
 
+  function renderAddButton () {
+    return html`
+    <button onclick=${handleShowForm} class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add item</button>
+    `
+  }
   return html`
     <body class="container mx-auto m-4">
       <main>
         ${state.items && state.items.map(renderItem)}
         ${state.showForm === true ? renderForm() : ''}
-        <button onclick=${handleShowForm} class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add item</button>
+        ${state.showForm === false ? renderAddButton() : ''}
       </main>
     </body>
   `
