@@ -21,7 +21,13 @@ function store (state, emitter) {
       state.showForm = false
       emitter.emit('update:all')
     })
-    emitter.on('items:load', function () {
+    emitter.on('data:load', function (data) {
+      if (data && data.refreshRate) {
+        state.refreshRate = data.refreshRate
+      }
+      if (data && data.items) {
+        state.items = state.items.concat(data.items)
+      }
       emitter.emit('update:all')
     })
     emitter.on('items:add', function (item) {

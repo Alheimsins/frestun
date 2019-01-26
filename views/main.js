@@ -61,19 +61,20 @@ function view (state, emit) {
 
   function renderAddButton () {
     return html`
-    <button onclick=${handleShowForm} class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add item</button>
+    <button onclick=${handleShowForm} class="flex-1 bg-blue-dark hover:bg-blue text-white font-bold py-2 px-4 m-2 rounded focus:outline-none focus:shadow-outline">Add item</button>
     `
   }
 
   function renderSaveButton () {
     return html`
-    <button onclick=${handleSave} class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Save settings</button>
+    <button onclick=${handleSave} class="flex-1 bg-blue-dark hover:bg-blue text-white font-bold py-2 px-4 m-2 rounded focus:outline-none focus:shadow-outline">Save data</button>
     `
   }
 
   function renderLoadButton () {
     return html`
-    <button onclick=${handleLoad} class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Load settings</button>
+    <input type='file' accept='.json' onchange=${handleLoad} class="hidden" />
+    <button onclick=${triggerUpload} class="flex-1 bg-blue-dark hover:bg-blue text-white font-bold py-2 px-4 m-2 rounded focus:outline-none focus:shadow-outline">Load data</button>
     `
   }
 
@@ -82,7 +83,7 @@ function view (state, emit) {
       <main>
         ${state.items && state.items.map(renderItem)}
         ${state.showForm === true ? renderForm() : ''}
-        <div>
+        <div class="flex">
           ${state.showForm === false ? renderAddButton() : ''}
           ${state.showForm === false ? renderSaveButton() : ''}
           ${state.showForm === false ? renderLoadButton() : ''}
@@ -113,9 +114,24 @@ function view (state, emit) {
     FileSaver.saveAs(file)
   }
 
+  function triggerUpload (e) {
+    e.preventDefault()
+    const fileField = e.target.previousSibling
+    fileField.click()
+  }
+
   function handleLoad (e) {
     e.preventDefault()
-    emit('items:load')
+    const reader = new window.FileReader()
+    const files = e.target.files
+    reader.onload = () => {
+      const text = reader.result
+      const data = JSON.parse(text)
+      emit('data:load', data)
+    }
+    if (files.length === 1) {
+      reader.readAsText(files[0])
+    }
   }
 
   function handleSubmitItem (e) {
