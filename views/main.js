@@ -1,4 +1,5 @@
 const html = require('choo/html')
+const FileSaver = require('file-saver')
 const calculateColor = require('../lib/calculate-color')
 const calculateText = require('../lib/calculate-text')
 const formatDateTime = require('../lib/format-date-time')
@@ -63,12 +64,29 @@ function view (state, emit) {
     <button onclick=${handleShowForm} class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add item</button>
     `
   }
+
+  function renderSaveButton () {
+    return html`
+    <button onclick=${handleSave} class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Save settings</button>
+    `
+  }
+
+  function renderLoadButton () {
+    return html`
+    <button onclick=${handleLoad} class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Load settings</button>
+    `
+  }
+
   return html`
     <body class="container mx-auto m-4">
       <main>
         ${state.items && state.items.map(renderItem)}
         ${state.showForm === true ? renderForm() : ''}
-        ${state.showForm === false ? renderAddButton() : ''}
+        <div>
+          ${state.showForm === false ? renderAddButton() : ''}
+          ${state.showForm === false ? renderSaveButton() : ''}
+          ${state.showForm === false ? renderLoadButton() : ''}
+        </div>
       </main>
     </body>
   `
@@ -83,6 +101,21 @@ function view (state, emit) {
   function handleShowForm (e) {
     e.preventDefault()
     emit('form:show')
+  }
+
+  function handleSave (e) {
+    e.preventDefault()
+    const data = {
+      refreshRate: state.refreshRate,
+      items: state.items
+    }
+    const file = new window.File([JSON.stringify(data, null, 2)], 'frestun.json', { type: 'text/json;charset=utf-8' })
+    FileSaver.saveAs(file)
+  }
+
+  function handleLoad (e) {
+    e.preventDefault()
+    emit('items:load')
   }
 
   function handleSubmitItem (e) {

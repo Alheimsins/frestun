@@ -17,6 +17,13 @@ function store (state, emitter) {
       state.showForm = true
       emitter.emit('update:all')
     })
+    emitter.on('form:hide', function () {
+      state.showForm = false
+      emitter.emit('update:all')
+    })
+    emitter.on('items:load', function () {
+      emitter.emit('update:all')
+    })
     emitter.on('items:add', function (item) {
       state.items.push(item)
       state.showForm = false
