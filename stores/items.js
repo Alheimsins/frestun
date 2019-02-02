@@ -30,11 +30,18 @@ function store (state, emitter) {
     })
     emitter.on('data:load', function (data) {
       if (data && data.refreshRate) {
-        state.refreshRate = data.refreshRate
+        emitter.emit('timer:update', data.refreshRate)
       }
       if (data && data.items) {
         state.items = state.items.concat(data.items)
       }
+      emitter.emit('update:all')
+    })
+    emitter.on('timer:update', function (refreshRate) {
+      state.refreshRate = refreshRate
+      clearInterval(state.timer)
+      state.timer = setInterval(checkRefresh, refreshRate)
+      state.showForm = false
       emitter.emit('update:all')
     })
     emitter.on('items:add', function (item) {
@@ -47,8 +54,8 @@ function store (state, emitter) {
         state.items = []
         state.refreshRate = 10000
         emitter.emit('update:all')
+        state.timer = setInterval(checkRefresh, state.refreshRate)
       }
-      state.timer = setInterval(checkRefresh, state.refreshRate)
     })
     emitter.emit('app:init')
   })

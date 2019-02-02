@@ -59,9 +59,31 @@ function view (state, emit) {
     `
   }
 
+  function renderRefreshForm () {
+    return html`
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit=${handleSubmitRefresh}>
+      <div>
+        <label class="block text-grey-darker text-sm font-bold mb-2" for="title">
+          Refresh rate
+        </label>
+        <input type="text" id="refreshRate" name="refreshRate" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline">
+      </div>
+      <div>
+        <button type="submit" class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Update</button>
+      </div>
+      </form>
+    `
+  }
+
   function renderAddButton () {
     return html`
     <button onclick=${handleShowForm} class="flex-1 bg-blue-dark hover:bg-blue text-white font-bold py-2 px-4 m-2 rounded focus:outline-none focus:shadow-outline">Add item</button>
+    `
+  }
+
+  function renderRefreshButton () {
+    return html`
+    <button onclick=${handleShowForm} class="flex-1 bg-blue-dark hover:bg-blue text-white font-bold py-2 px-4 m-2 rounded focus:outline-none focus:shadow-outline">Change refresh rate</button>
     `
   }
 
@@ -83,10 +105,12 @@ function view (state, emit) {
       <main>
         ${state.items && state.items.map(renderItem)}
         ${state.showForm === true ? renderForm() : ''}
+        ${state.showForm === true ? renderRefreshForm() : ''}
         <div class="flex">
           ${state.showForm === false ? renderAddButton() : ''}
           ${state.showForm === false ? renderSaveButton() : ''}
           ${state.showForm === false ? renderLoadButton() : ''}
+          ${state.showForm === false ? renderRefreshButton() : ''}
         </div>
       </main>
     </body>
@@ -138,7 +162,6 @@ function view (state, emit) {
     e.preventDefault()
     var form = e.currentTarget
     var data = new window.FormData(form)
-    console.log(data.entries)
     var body = {}
     for (var pair of data.entries()) {
       body[pair[0]] = pair[1]
@@ -152,5 +175,16 @@ function view (state, emit) {
       }
     }
     emit('items:add', item)
+  }
+
+  function handleSubmitRefresh (e) {
+    e.preventDefault()
+    var form = e.currentTarget
+    var data = new window.FormData(form)
+    var body = {}
+    for (var pair of data.entries()) {
+      body[pair[0]] = pair[1]
+    }
+    emit('timer:update', body.refreshRate)
   }
 }
