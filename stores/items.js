@@ -1,6 +1,13 @@
 module.exports = store
 
 function store (state, emitter) {
+  const checkRefresh = () => {
+    const now = new Date().getTime()
+    if (now - state.lastUpdated > state.refreshRate && !state.showForm) {
+      state.lastUpdated = now
+      emitter.emit('update:all')
+    }
+  }
   state.lastUpdated = new Date().getTime()
   state.showForm = false
 
@@ -41,14 +48,8 @@ function store (state, emitter) {
         state.refreshRate = 10000
         emitter.emit('update:all')
       }
+      state.timer = setInterval(checkRefresh, state.refreshRate)
     })
     emitter.emit('app:init')
-    setInterval(function () {
-      const now = new Date().getTime()
-      if (now - state.lastUpdated > state.refreshRate && !state.showForm) {
-        state.lastUpdated = now
-        emitter.emit('update:all')
-      }
-    }, state.refreshRate)
   })
 }
