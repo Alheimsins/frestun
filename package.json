@@ -9,7 +9,7 @@
     "inspect": "bankai inspect index.js",
     "start": "bankai start index.js",
     "test": "standard && ava && npm audit && npm run test-deps",
-    "test-deps": "dependency-check . && dependency-check . --extra --no-dev -i tailwindcss",
+    "test-deps": "dependency-check . && dependency-check . --extra --no-dev -i tailwindcss -i extend",
     "now-build": "bankai build index.js",
     "deploy": "npm test && now && now alias",
     "refresh": "rm -rf node_modules && rm package-lock.json && npm install"
@@ -22,6 +22,7 @@
     "choo": "6.13.1",
     "choo-persist": "3.0.2",
     "choo-service-worker": "2.4.0",
+    "extend": "3.0.2",
     "file-saver": "2.0.1",
     "sheetify": "7.3.3",
     "tailwindcss": "0.7.4"
