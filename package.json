@@ -23,7 +23,7 @@
     "choo-persist": "3.0.2",
     "choo-service-worker": "2.4.0",
     "extend": "3.0.2",
-    "file-saver": "2.0.1",
+    "file-saver": "2.0.2",
     "sheetify": "7.4.0",
     "tailwindcss": "1.0.3"
   },
