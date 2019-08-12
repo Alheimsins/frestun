@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "ava": "2.2.0",
-    "bankai": "9.15.1",
+    "bankai": "9.15.2",
     "choo-devtools": "3.0.0",
     "choo-scaffold": "1.2.0",
     "dependency-check": "3.4.1",
