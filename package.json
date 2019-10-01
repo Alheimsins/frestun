@@ -30,7 +30,7 @@
   "devDependencies": {
     "ava": "2.4.0",
     "bankai": "9.15.2",
-    "choo-devtools": "3.0.1",
+    "choo-devtools": "3.0.2",
     "choo-scaffold": "1.2.0",
     "dependency-check": "4.1.0",
     "standard": "14.3.1"
