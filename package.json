@@ -33,7 +33,7 @@
     "choo-devtools": "3.0.4",
     "choo-scaffold": "1.2.0",
     "dependency-check": "4.1.0",
-    "standard": "14.3.4"
+    "standard": "15.0.0"
   },
   "engines": {
     "node": ">=10.15.3"
